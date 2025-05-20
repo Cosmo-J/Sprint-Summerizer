@@ -1,12 +1,13 @@
 import requests
-import dotenv
 import json
 import base64
-import sys
 from NLP import compress_summary,text_length
-JIRA_API_TOKEN=""
-JIRA_EMAIL=""
-JIRA_DOMAIN ="" 
+
+import credentials as c
+
+JIRA_API_TOKEN = c.JIRA_API_TOKEN
+JIRA_EMAIL = c.JIRA_EMAIL
+JIRA_DOMAIN = c.JIRA_DOMAIN
 
 auth_str = f"{JIRA_EMAIL}:{JIRA_API_TOKEN}".encode("ascii")
 auth_b64 = base64.b64encode(auth_str).decode("ascii")
@@ -20,7 +21,7 @@ def GetActiveSprint(board = 1):
     #board default is one because that is the product board
     url = f"https://{JIRA_DOMAIN}/rest/agile/1.0/board/{board}/sprint?state=active"
     payload = {}
-    response = requests.get(url, headers=HEADERS, data=json.dumps(payload))
+    response = requests.get(url, headers=HEADERS)# , data=json.dumps(payload))
     data = response.json()
     if (response.status_code == 200):
         values = data.get("values")[0]
@@ -35,7 +36,7 @@ def GetParsedIssues():
     sprintId = GetActiveSprint()
     issues = GetAllIssues(sprintId)
     parsedIssues = IssueIter(issues)
-    print(f"Parsed Issues {len(parsedIssues)}")
+    print(f"Total issues retrieved: {len(parsedIssues)}")
     return parsedIssues
 
     
@@ -76,9 +77,7 @@ def GetAllIssues(sprintId):
         # Otherwise, increment startAt and fetch the next page
         start_at += max_results
 
-    print(f"Total issues retrieved: {len(all_issues)}")
     return all_issues
-
 
 def IssueIter(issue_data):
     issues = []

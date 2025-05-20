@@ -1,13 +1,12 @@
 import os
 import openai
+from get_from_jira import GetParsedIssues
+import credentials as c
 
-from ParseIssues import GetParsedIssues
+openai.api_key = c.OPENAI_API_KEY
 
 
-openai.api_key = ""
-
-
-def generate_patch_notes(issues):
+def GeneratePatchNotes(issues):
 
 
     issue_summaries = []
@@ -31,7 +30,7 @@ def generate_patch_notes(issues):
         issue_summaries.append(summary)
 
     combined_issues_text = "\n".join(issue_summaries)
-
+    #TODO: read from prompt.tx
     prompt = (
         "You are an assistant that generates concise, developer-friendly patch notes. "
         "Using the following list of issues, please create clear, short patch notes: \n\n"
@@ -54,16 +53,3 @@ def generate_patch_notes(issues):
     # Extract the assistant's output
     patch_notes = response["choices"][0]["message"]["content"].strip()
     return patch_notes
-
-
-def main():
-    issues = GetParsedIssues()
-    # Now generate patch notes
-    patch_notes = generate_patch_notes(issues)
-    print("\n=== PATCH NOTES ===")
-    print(patch_notes)
-    print("===================")
-
-
-if __name__ == "__main__":
-    main()

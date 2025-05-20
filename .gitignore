@@ -1,8 +1,8 @@
 /Winenv
 /pnVenv
 /__pycache__
-/credentialsLOCAL.py
 /Outputs/*.csv
 /Outputs/*.md
 /notes.txt
 /.DS_store
+/venv
