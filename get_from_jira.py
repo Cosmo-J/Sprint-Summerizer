@@ -1,8 +1,8 @@
 import requests
-import json
 import base64
 from NLP import compress_summary,text_length
 
+import Settings as s
 import credentials as c
 
 JIRA_API_TOKEN = c.JIRA_API_TOKEN
@@ -17,9 +17,9 @@ HEADERS = {
     "Content-Type": "application/json"
 }
 
-def GetActiveSprint(board = 1):
+def GetActiveSprint():
     #board default is one because that is the product board
-    url = f"https://{JIRA_DOMAIN}/rest/agile/1.0/board/{board}/sprint?state=active"
+    url = f"https://{JIRA_DOMAIN}/rest/agile/1.0/board/{s.BOARD}/sprint?state=active"
     payload = {}
     response = requests.get(url, headers=HEADERS)# , data=json.dumps(payload))
     data = response.json()
@@ -51,7 +51,7 @@ def GetAllIssues(sprintId):
     while True:
         # Provide JQL, startAt, and maxResults as query params
         params = {
-            "jql": 'status = "Deployed on Prod"',
+            "jql": f'status = {s.JIRACOLUMN}',
             "startAt": start_at,
             "maxResults": max_results
         }
