@@ -7,12 +7,12 @@ The script pulls issues from the column you specify, optionally feeds them to Op
 ---
 
 ## Table of contents
-1. [Features](Features) 
-2. [Installation](Installation)
-3. [Configuration](Configuration)
-4. [Usage](Usage)
-5. [Examples](Examples)
-6. [Troubleshooting](Troubleshooting)
+1. [Features](https://github.com/Cosmo-J/Sprint-Summerizer?tab=readme-ov-file#features) 
+2. [Installation](https://github.com/Cosmo-J/Sprint-Summerizer?tab=readme-ov-file#installation)
+3. [Configuration](https://github.com/Cosmo-J/Sprint-Summerizer?tab=readme-ov-file#configuration)
+4. [Usage](https://github.com/Cosmo-J/Sprint-Summerizer?tab=readme-ov-file#usage)
+5. [Examples](https://github.com/Cosmo-J/Sprint-Summerizer?tab=readme-ov-file#examples)
+6. [Troubleshooting](https://github.com/Cosmo-J/Sprint-Summerizer?tab=readme-ov-file#troubleshooting)
 
 ---
 
