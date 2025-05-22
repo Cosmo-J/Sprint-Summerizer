@@ -1,4 +1,4 @@
-# Patch-Notes-from-Jira & OpenAI
+# Sprint-Summerizer
 ----*This README was generated with the assistance of chatgpt*----
 
 Generate human-readable patch notes (Markdown) **and/or** a raw CSV export straight from a Jira board in one command-line call.  
@@ -25,7 +25,7 @@ The script pulls issues from the column you specify, optionally feeds them to Op
 ---
 
 ## Installation
-git clone https://github.com/your-org/patch-notes-from-jira.git
+git clone https://github.com/Cosmo-J/Sprint-Summerizer.git
 cd patch-notes-from-jira
 python -m venv .venv
 
