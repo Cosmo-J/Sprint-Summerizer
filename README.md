@@ -27,7 +27,7 @@ The script pulls issues from the column you specify, optionally feeds them to Op
 ## Installation
 git clone https://github.com/Cosmo-J/Sprint-Summerizer.git
 
-cd patch-notes-from-jira
+cd Sprint-Summerizer
 
 python -m venv .venv
 
