@@ -17,10 +17,10 @@ The script pulls issues from the column you specify, optionally feeds them to Op
 ---
 
 ## Features
-* One-shot export – fetch all issues in *one* Jira board column and save them as CSV.  
+* One-shot export – fetch all issues of one Jira board column and save them as CSV.  
 * Auto-generated patch notes – hand the same list to OpenAI and receive well-formatted Markdown release notes.  
 * Credential test mode – quickly verify both APIs before you run anything heavy.  
-* Minimal setup – just edit `settings.py` and `credentials.py`. No DBs, no servers.
+* Minimal setup – just edit `settings.py` and `credentials.py`.
 
 ---
 
@@ -28,10 +28,11 @@ The script pulls issues from the column you specify, optionally feeds them to Op
 git clone https://github.com/your-org/patch-notes-from-jira.git
 cd patch-notes-from-jira
 python -m venv .venv
-source .venv/bin/activate      # Windows: .venv\Scripts\activate
+Mac: source .venv/bin/activate      
+Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 
-(Python 3.9+ is recommended – tested up to 3.12.)
+Python 3.13.2 is recommended
 
 ---
 
@@ -39,34 +40,31 @@ pip install -r requirements.txt
 
 ### 1. settings.py
 
-BOARD            int    Numeric Jira board ID              e.g. 42
-JIRACOLUMN       str    Exact column name to pull from      "Done"
-OUTPUTFOLDERcsv  str    Folder path for CSV files          "exports/csv"
-OUTPUTFOLDERmd   str    Folder path for Markdown files     "exports/md"
+|BOARD|int|Numeric Jira board ID|e.g. 42|
+|JIRACOLUMN|str|Exact column name to pull from|"Done"|
+|OUTPUTFOLDERcsv|str|Folder path for CSV files|"exports/csv"|
+|OUTPUTFOLDERmd|str|Folder path for Markdown files|"exports/md"|
 
 (All four are required. Folders are created automatically if missing.)
 
 ### 2. credentials.py
 
-JIRA_API_TOKEN = "..."          # create at id.atlassian.com/manage-profile/security/api-tokens
+JIRA_API_TOKEN = "..."
 JIRA_EMAIL     = "you@example.com"
 JIRA_DOMAIN    = "yourcompany.atlassian.net"
+create at id.atlassian.com/manage-profile/security/api-tokens
+
 OPENAI_API_KEY = "sk-..."
-
-The helper in credentials.CheckCredentials() will hit both APIs and print a success code (200/201/202) if everything works.
-
-Tip: prefer environment variables in CI—just read them inside credentials.py.
-
----
+platform.openai.com/docs/api-reference/authentication/
 
 ## Usage
 python main.py [options]
 
 Options:
-  --csv, -c <filename>           Save issues to <filename>.csv
-  --openai, --md, -o, -m <name>  Generate Markdown patch notes (filename *.md)
-  --apiTest, --test, -t          Only validate Jira & OpenAI credentials
-  -h, --help                     Show built-in help
+|--csv, -c <filename>|Save issues to <filename>.csv|
+|--openai, --md, -o, -m <name>|Generate Markdown patch notes (filename *.md)|
+|--apiTest, --test, -t|Only validate Jira & OpenAI credentials|
+|-h, --help|Show built-in help|
 
 Argument rules
 * You may pass either --csv or --openai or both.  
@@ -99,13 +97,3 @@ Invalid OpenAI credentials!  → Key revoked/expired, or your org blocked the mo
 Permission errors writing files → Verify OUTPUTFOLDERcsv / OUTPUTFOLDERmd paths exist or are creatable.  
 No issues found              → Column name in settings.JIRACOLUMN is case-sensitive—copy it exactly from the board.
 
----
-
-## Contributing & Licence
-Pull requests and issue reports are welcome! Please open a discussion first if you plan big changes.
-
-Licence: TBD – defaulting to “All rights reserved” until we pick OSS terms (MIT, Apache 2, etc.). Feel free to suggest.
-
----
-
-Happy shipping!
